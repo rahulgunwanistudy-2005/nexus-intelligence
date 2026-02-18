@@ -1,0 +1,13 @@
+**/__pycache__
+**/*.pyc
+**/*.pyo
+.git
+.gitignore
+.env
+venv/
+.venv/
+data/raw/*.html
+data/processed/*.parquet
+*.md
+tests/
+.pytest_cache/

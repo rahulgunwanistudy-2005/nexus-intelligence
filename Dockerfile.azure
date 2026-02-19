@@ -1,7 +1,6 @@
 cat > Dockerfile.azure << 'EOF'
 FROM python:3.10-slim
 
-# Install system deps for Playwright BEFORE running playwright install
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl wget ca-certificates fonts-liberation fonts-noto-color-emoji \
     libasound2 libatk-bridge2.0-0 libatk1.0-0 libcairo2 \
@@ -17,10 +16,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Playwright WITHOUT --with-deps (we already installed deps above)
 RUN playwright install chromium
 
-# Verify install
 RUN python -c "from playwright.sync_api import sync_playwright; print('Playwright OK')"
 
 COPY src/ ./src/
